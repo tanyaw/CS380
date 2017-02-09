@@ -1,3 +1,3 @@
 # CS380
 
-Implement IPv4 packets
+Create packets implementing IPv4 protocol 
