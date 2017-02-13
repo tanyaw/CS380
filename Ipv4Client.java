@@ -84,19 +84,6 @@ public class Ipv4Client {
 					packet[16+i] = (byte) val;
 				}
 
-				//Print binary output of IPv4 pakcet headers
-				/**
-				System.out.println("0        8        16       24");
-				int counter=1;
-				for(byte b: packet) {
-				    System.out.print(Integer.toBinaryString(b & 255 | 256).substring(1) + " ");
-				    if(counter%4 ==0) {
-				    	System.out.println();
-				    }
-				    counter++;
-				}
-				 */
-
 				//Send byte array to checksum
 				short returnVal = checkSum(packet);
 
@@ -121,6 +108,21 @@ public class Ipv4Client {
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Helper Method - Prints binary output of IPv4 packet headers
+	 * */
+	public static void printPacket() {
+		System.out.println("0        8        16       24");
+		int counter=1;
+		for(byte b: packet) {
+		    System.out.print(Integer.toBinaryString(b & 255 | 256).substring(1) + " ");
+		    if(counter%4 ==0) {
+		    	System.out.println();
+		    }
+		    counter++;
 		}
 	}
 
