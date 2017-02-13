@@ -66,18 +66,6 @@ public class Ipv6Client {
 				packet[38] = (byte) destAddr[2];
 				packet[39] = (byte) destAddr[3];
 
-				//Print IPv6 Header packet
-				/*System.out.println("0        8        16       24");
-				int counter=1;
-				for(byte b: packet) {
-					System.out.print(Integer.toBinaryString(b & 255 | 256).substring(1) + " ");
-					if(counter%4 ==0) {
-						System.out.println();
-					}
-					counter++;
-				}
-				 */
-
 				//Write to Server
 				for(byte b : packet) {
 					os.write(b);
@@ -98,6 +86,21 @@ public class Ipv6Client {
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Helper Method - Prints binary output of IPv6 packet headers
+	 * */
+	public static void printPacket() {
+		System.out.println("0        8        16       24");
+		int counter=1;
+		for(byte b: packet) {
+		    System.out.print(Integer.toBinaryString(b & 255 | 256).substring(1) + " ");
+		    if(counter%4 ==0) {
+		    	System.out.println();
+		    }
+		    counter++;
 		}
 	}
 }
