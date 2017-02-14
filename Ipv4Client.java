@@ -114,7 +114,7 @@ public class Ipv4Client {
 	/**
 	 * Helper Method - Prints binary output of IPv4 packet headers
 	 * */
-	public static void printPacket() {
+	public static void printPacket(byte[] packet) {
 		System.out.println("0        8        16       24");
 		int counter=1;
 		for(byte b: packet) {
