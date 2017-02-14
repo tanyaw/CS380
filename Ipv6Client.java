@@ -92,7 +92,7 @@ public class Ipv6Client {
 	/**
 	 * Helper Method - Prints binary output of IPv6 packet headers
 	 * */
-	public static void printPacket() {
+	public static void printPacket(byte[] packet) {
 		System.out.println("0        8        16       24");
 		int counter=1;
 		for(byte b: packet) {
