@@ -18,22 +18,19 @@ public class Ipv4Client {
 			BufferedReader br = new BufferedReader(isr);
 			OutputStream os = socket.getOutputStream();
 
-			//If not work, make byte[] 20 + dataLength
+			//Create IPv4 Header (20 bytes)
 			byte packet[] = new byte[20];
 
 			for(int index=1; index < 13; index++) {
-				//IPv4 Version
-				int version = 4;
-
-				//Header Length (in words)
-				int HL = 5;
+				
+				int version = 4;  //IPv4 Version
+				int HL = 5;  //Header Length (in words)
 
 				//Concatenate for 1st byte of Packet
 				packet[0] = (byte) ((version<<4 & 0xF0) | (HL & 0xF));
 
 				//TOS (No implementation)
-				int TOS = 0;
-				packet[1] = (byte) TOS;
+				//Value at packet[1] is initialized to 0
 
 				//Total Length (Header + Data length in bytes)
 				int dataLength = (int) Math.pow(2, index);
@@ -45,33 +42,25 @@ public class Ipv4Client {
 				packet[3] = (byte) lowerTotalLen;
 
 				//Identification (No implementation)
-				int ID = 0;
-				packet[4] = (byte) ID;
-				packet[5] = (byte) ID;
+				//Values at packet[4 to 5] are initialized to 0
 
 				//Flag is set to '010'
 				//Fragment offset is 0 so adds 5 0's to the end of 010 = 01000000
-				int flag = 64;
-				packet[6] = (byte) flag;
+				packet[6] = (byte) 64;
 
 				//Fragment Offset (No implementation)
-				int fragOffset = 0;
-				packet[7] = (byte) fragOffset;
+				//Value at packet[7] is initialized to 0
 
 				//Time to Live
-				int TTL = 50;
-				packet[8] = (byte) TTL;
+				packet[8] = (byte) 50;
 
 				//TCP Protocol
-				int TCP = 6;
-				packet[9] = (byte) TCP;
+				packet[9] = (byte) 6;
 
 				//CheckSum, set to 0
-				int chkSum = 0;
-				packet[10] = (byte) chkSum;
-				packet[11] = (byte) chkSum;
+				//Values at packet[10 to 11] are initialized to 0
 
-				//Source/Sender IP Address
+				//Source/Sender IP Address - set to local address 127.0.0.1
 				int[] sourceAddress = {127, 0, 0, 1};
 				for(int i=0; i < sourceAddress.length; i++) {
 					packet[12+i] = (byte) sourceAddress[i];
